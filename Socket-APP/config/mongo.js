@@ -1,16 +1,20 @@
 const mongoose = require('mongoose');
 const config = require('./index');
 
-const connectionURL = `mongodb://${config.db.url}/${config.db.name}`;
-console.log(connectionURL)
-
-mongoose.connect(connectionURL, {
+console.log("Mongo Db connection URL is :",config.db.connectionUrl)
+mongoose.connect(config.db.connectionUrl, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
 });
 
 mongoose.connection.on('connected', () => {
-    console.log('Mongo has connected succesfully')
+    console.log('Mongo has connected succesfully');
+    process.on('SIGINT', function () {
+        mongoose.disconnect();
+        process.exit();
+    })
 });
 
 mongoose.connection.on('reconnected', () => {

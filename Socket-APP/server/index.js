@@ -1,3 +1,4 @@
+"use strict";
 const http = require('http');
 const express = require('express');
 const logger = require('morgan');
@@ -11,10 +12,10 @@ const chatroomRouter = require("../routes/chatroom.js");
 const deleteRouter = require("../routes/delete.js");
 
 /** Declaring middleware routes */
-const { decode } = require("../middlewares/jwt.js");
+const { decode, encode } = require("../middlewares/jwt.js");
 
 /** Establishing connection to Mongodb instance config */
-const mongo = require('../config/mongo.js');
+require('../config/mongo.js');
 
 /** Express app instance */
 const app = express();
@@ -32,7 +33,7 @@ app.use(express.urlencoded({ extended:false}));
 /** Adding routes to chat app */
 app.use('/',indexRouter);
 app.use("/users",userRouter);
-app.use("/room",chatroomRouter);
+app.use("/room",decode,chatroomRouter);
 app.use("/delete",deleteRouter);
 
 /** Catch 404 and forward to error handler */

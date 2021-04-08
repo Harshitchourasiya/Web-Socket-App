@@ -1,4 +1,11 @@
-module.export = {
-    deleteRoomById: async (req, res) => {},
-    deleteMessageById: async (req, res) => {},
-  }
+const deleteRoomById = function(req,res){
+    
+}
+const deleteMessageById = function(req,res){
+    
+}
+
+module.exports = {
+  deleteRoomById,
+  deleteMessageById
+}

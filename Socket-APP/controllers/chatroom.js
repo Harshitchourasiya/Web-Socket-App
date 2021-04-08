@@ -1,7 +1,23 @@
-module.export = {
-    initiate: async (req, res) => { },
-    postMessage: async (req, res) => { },
-    getRecentConversation: async (req, res) => { },
-    getConversationByRoomId: async (req, res) => { },
-    markConversationReadByRoomId: async (req, res) => { },
+const initiate = function(req,res){
+    
+}
+const postMessage = function(req,res){
+    
+}
+const getRecentConversation = function(req,res){
+    
+}
+const getConversationByRoomId = function(req,res){
+    
+}
+const markConversationReadByRoomId = function(req,res){
+    
+}
+
+module.exports = {
+    initiate,
+    postMessage,
+    getRecentConversation,
+    getConversationByRoomId,
+    markConversationReadByRoomId
   }

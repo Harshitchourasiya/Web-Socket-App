@@ -1,10 +1,11 @@
 "use strict";
 const express = require('express');
-//controllers
-const user = require('../controllers/user.js');
+
+// controllers
 const authenticationController = require("../controllers/authentication");
+
 //middelwares
-const { decode, encode } = require('../middlewares/jwt.js');
+const { encode } = require('../middlewares/jwt.js');
 
 const router = express.Router();
 

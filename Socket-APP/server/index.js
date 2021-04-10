@@ -13,7 +13,7 @@ const chatroomRouter = require("../routes/chatroom.js");
 const deleteRouter = require("../routes/delete.js");
 
 /** Declaring middleware routes */
-const { decode, encode } = require("../middlewares/jwt.js");
+const { decode } = require("../middlewares/jwt.js");
 
 /** Establishing connection to Mongodb instance config */
 require('../config/mongo.js');
@@ -47,7 +47,6 @@ app.use('*', (res) => {
     message: 'API endpoint doesnt exist'
   })
 });
-
 
 /** Creating a HTTP server */
 const server = http.createServer(app);

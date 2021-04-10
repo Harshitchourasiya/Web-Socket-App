@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "d2532683-867f-4b0e-b49e-1b7e509fefde",
+		"name": "Socket-App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Sign-Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"email\":\"harshitchourasiya97@gmail.com\",\r\n    \"password\" : \"harshit@123\",\r\n    \"firstName\": \"Harshu\",\r\n    \"lastName\": \"\",\r\n    \"type\":\"consumer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"harshitchourasiya97@gmail.com\",\r\n    \"password\":\"harshit@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/users/25bba06e5c12489dbd3d9771f983aafa",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"25bba06e5c12489dbd3d9771f983aafa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUserbyId",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/users/ca0e590ea76f4c57a8bb56f7dae83eb5",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"ca0e590ea76f4c57a8bb56f7dae83eb5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Initiate Chatroom",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhcnNoaXRjaG91cmFzaXlhOTdAZ21haWwuY29tIiwiaWF0IjoxNjE3OTcwMzY1fQ.EIA01InQxvOyxKxDOKeVRY_ES4jJBJmoajXICFvjQUI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userIds\": [\"9683ad0bcac84159970069a1d22a41c3\"],\r\n    \"type\": \"consumer-to-consumer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/room/initiate",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"room",
+						"initiate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send message to a chatroom",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhcnNoaXRjaG91cmFzaXlhOTdAZ21haWwuY29tIiwiaWF0IjoxNjE3OTcwMzY1fQ.EIA01InQxvOyxKxDOKeVRY_ES4jJBJmoajXICFvjQUI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"messageText\":\"This one is the second message\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/room/a32e5a379af8478da3af267ad06e6d89/message",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"room",
+						"a32e5a379af8478da3af267ad06e6d89",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getConversationByRoomId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhcnNoaXRjaG91cmFzaXlhOTdAZ21haWwuY29tIiwiaWF0IjoxNjE3OTcwMzY1fQ.EIA01InQxvOyxKxDOKeVRY_ES4jJBJmoajXICFvjQUI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/room/a32e5a379af8478da3af267ad06e6d89?limit=1&page=0",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"room",
+						"a32e5a379af8478da3af267ad06e6d89"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "markConversationReadByRoomId",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhhcnNoaXRjaG91cmFzaXlhOTdAZ21haWwuY29tIiwiaWF0IjoxNjE3OTcwMzY1fQ.EIA01InQxvOyxKxDOKeVRY_ES4jJBJmoajXICFvjQUI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/room/a32e5a379af8478da3af267ad06e6d89/mark-read",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"room",
+						"a32e5a379af8478da3af267ad06e6d89",
+						"mark-read"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteRoomById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/delete/room/a32e5a379af8478da3af267ad06e6d89",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"delete",
+						"room",
+						"a32e5a379af8478da3af267ad06e6d89"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMessageById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/delete/message/72328100a8e84043aac4957684dbcbeb",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"delete",
+						"message",
+						"72328100a8e84043aac4957684dbcbeb"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -3,6 +3,7 @@ const http = require('http');
 const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
+const socketio = require("socket.io");
 require("dotenv").config();
 
 /** Declaring API routes */
@@ -16,6 +17,9 @@ const { decode, encode } = require("../middlewares/jwt.js");
 
 /** Establishing connection to Mongodb instance config */
 require('../config/mongo.js');
+
+// socket configuration
+const webSockets =  require("../utils/websockets");
 
 /** Express app instance */
 const app = express();
@@ -48,10 +52,14 @@ app.use('*', (res) => {
 /** Creating a HTTP server */
 const server = http.createServer(app);
 
+/** Create socket connection */
+global.io = socketio.listen(server);
+global.io.on('connection', webSockets.connection)
+
 /** Listen on provided port on all available interfaces */
 server.listen(port);
 
 /** Event listeners for HTTP server listening event */
 server.on('listening', () => {
     console.log(`Listening on port:: http://localhost:${port}/`);
-})
+})  

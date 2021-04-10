@@ -6,8 +6,8 @@ const decode = function (req, res, next) {
     }
     const accessToken = req.headers.authorization.split(' ')[1];
     try {
-        const decoded = jwt.verify(accessToken, SECRET_KEY);
-        req.userId = decoded.userId;
+        const decoded = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+        req.email = decoded.email;
         req.userType = decoded.type;
         return next();
     } catch (error) {

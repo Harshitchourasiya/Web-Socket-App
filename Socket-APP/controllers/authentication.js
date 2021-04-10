@@ -1,8 +1,9 @@
 "use strict";
 const makeValidation = require("@withvoid/make-validation");
-const userModel = require("../models/User");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+
+// Models
+const userModel = require("../models/User");
 
 const login = async function (req, res, next) {
     try {
@@ -36,7 +37,7 @@ const login = async function (req, res, next) {
         res.json({
             status: false,
             message: "Something went wrong",
-            error:error
+            error: error
         });
     }
 };
@@ -62,7 +63,6 @@ const signUp = async function (req, res, next) {
         }));
         if (!requestBodyValidation.success) return res.status(400).json(requestBodyValidation);
 
-
         const user = await userModel.findOne({ email: req.body.email });
         if (user) return res.status(409).json({ status: false, message: "User Already Registered." })
 
@@ -83,18 +83,10 @@ const signUp = async function (req, res, next) {
             message: "Error in Register this user."
         })
 
-        // Tokens with sign up is necessaary add when you need it.
-        // const tokens = await generateAccessToken(req.body.email, req.body.password);
-        // if (!tokens) return res.status(400).json({
-        //     status: false,
-        //     message: "Token generation failed."
-        // })
         return res.status(200).json({
             status: true,
             message: "User Registered Successfully",
-            userData: result,
-            // accessToken: tokens.accessToken,
-            // refreshToken: tokens.refreshToken
+            userData: result
         });
     } catch (error) {
         console.log(error);

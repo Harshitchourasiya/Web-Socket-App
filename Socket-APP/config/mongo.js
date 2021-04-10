@@ -1,7 +1,8 @@
+"use strict";
 const mongoose = require('mongoose');
 const config = require('./index');
 
-console.log("Mongo Db connection URL is :",config.db.connectionUrl)
+console.log("Mongo Db connection URL is :", config.db.connectionUrl)
 
 /** Connnecting Mongo db instance using Connection url.  */
 mongoose.connect(config.db.connectionUrl, {

@@ -1,3 +1,5 @@
+"use scripts";
+// Models
 const chatRoomModel = require("../models/Chatroom");
 const chatMessagesModel = require("../models/ChatMessages");
 const userModel = require("../models/User");

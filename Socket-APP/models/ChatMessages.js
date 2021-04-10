@@ -20,13 +20,13 @@ const chatMessageSchema = new mongoose.Schema(
             type: String,
             default: () => uuid().replace(/\-/g, ""),
         },
-        chatRoomId: { type : String},
+        chatRoomId: { type: String },
         message: mongoose.Schema.Types.Mixed,
         type: {
             type: String,
             default: () => "text",
         },
-        postedByUser: { type : String },
+        postedByUser: { type: String },
         readByRecipients: [readByRecipientSchema],
     },
     {

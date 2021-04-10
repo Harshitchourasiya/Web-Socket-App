@@ -1,3 +1,4 @@
+"use scripts";
 class websockets {
     users = [] // Hold a list of all the active users that are online using our application.
 

@@ -8,7 +8,7 @@ var userSchema = new mongoose.Schema({
         default: () => uuid().replace(/\-/g, ""),
     },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required:true },
+    password: { type: String, required: true },
     firstName: { type: String },
     lastName: { type: String }
 }, {

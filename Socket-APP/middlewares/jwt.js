@@ -1,5 +1,9 @@
+"use strict";
 const jwt = require('jsonwebtoken');
+
+// Models
 const userModel = require("../models/User");
+
 const decode = function (req, res, next) {
     if (!req.headers['authorization']) {
         return res.status(400).json({ success: false, message: 'No access token provided' });

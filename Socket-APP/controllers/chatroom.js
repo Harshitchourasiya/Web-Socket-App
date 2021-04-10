@@ -1,10 +1,17 @@
 "use strict";
 const makeValidation = require("@withvoid/make-validation");
-const chatroomHelper = require("../utils/chatroom.helper");
-const socketio = require("socket.io");
 
+// Utilss
+const chatroomHelper = require("../utils/chatroom.helper");
+
+/**
+ * Initiates a chat room using a user Id.
+ * 
+ * @returns 
+ */
 const initiate = async function (req, res) {
   try {
+    // Validate the req.body with respective Model schema.
     const validation = makeValidation(types => ({
       payload: req.body,
       checks: {
@@ -19,7 +26,7 @@ const initiate = async function (req, res) {
         type: {
           type: types.enum,
           options: {
-            enum: {
+            enum: { // Types of chat room created
               CONSUMER_TO_CONSUMER: "consumer-to-consumer",
               CONSUMER_TO_SUPPORT: "consumer-to-support",
             }
@@ -41,6 +48,11 @@ const initiate = async function (req, res) {
   }
 }
 
+/**
+ * Send a message in a chat room.
+ * 
+ * @returns 
+ */
 const postMessage = async function (req, res) {
   try {
     const { roomId } = req.params;
@@ -55,13 +67,20 @@ const postMessage = async function (req, res) {
     const messagePayload = { messageText: req.body.messageText };
     const currentLoggedUser = await chatroomHelper.getUserByEmail(req.email); // Retrive chat intiator userId from db
     const post = await chatroomHelper.createPostInChatRoom(roomId, messagePayload, currentLoggedUser);
-    global.io.sockets.in(roomId).emit('new message', { message: post });
+
+    // Emits the message to the sockets, One can get the message at front end by just subscribing the sockets.
+    global.io.sockets.in(roomId).emit('new message', { message: post }); 
     return res.status(200).json({ status: true, post:post });
   } catch (error) {
     return res.status(500).json({ status: false, error: error })
   }
 }
 
+/**
+ * Retrives the recent conversation from db using the room ids for the current logging user.
+ * 
+ * @returns 
+ */
 const getRecentConversation = async function (req, res) {
   try {
     const currentLoggedUser = await chatroomHelper.getUserByEmail(req.email); // Retrive chat intiator userId from db
@@ -80,6 +99,11 @@ const getRecentConversation = async function (req, res) {
   }
 }
 
+/**
+ * Retrives conversations for a particular room for the logined user.
+ * 
+ * @returns 
+ */
 const getConversationByRoomId = async function (req, res) {
   try {
     const { roomId } = req.params;
@@ -106,6 +130,10 @@ const getConversationByRoomId = async function (req, res) {
   }
 }
 
+/**
+ * Marks all conversations of the room as read.
+ * @returns 
+ */
 const markConversationReadByRoomId = async function (req, res) {
   try {
     const { roomId } = req.params;
@@ -119,10 +147,10 @@ const markConversationReadByRoomId = async function (req, res) {
 
     const currentLoggedUser = await chatroomHelper.getUserByEmail(req.email);
     const result = await chatroomHelper.markMessageRead(roomId, currentLoggedUser);
-    return res.status(200).json({ success: true, data: result });
+    return res.status(200).json({ status: true, data: result });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ success: false, error });
+    return res.status(500).json({ status: false, error });
   }
 }
 

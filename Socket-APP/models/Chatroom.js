@@ -7,14 +7,14 @@ var chatRoomSchema = new mongoose.Schema({
         type: String,
         default: () => uuid().replace(/\-/g, ""),
     },
-    userIds : {
+    userIds: {
         type: Array
     },
-    type : {
+    type: {
         type: String
     },
-    chatInitiator : {
-        type : String
+    chatInitiator: {
+        type: String
     }
 }, {
     timestamps: true,

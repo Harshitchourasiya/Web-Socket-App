@@ -1,15 +1,12 @@
 const express = require('express');
+
 //conrollers
-const deleteUser = require('../controllers/delete.js');
+const deleteController = require('../controllers/delete.js');
 
 const router = express.Router();
 
 router
-    .delete("/room/:roomId",deleteRoomById = function (req,res) {
-
-    })
-    .delete("/message/:messageId",deleteMessageById = function (req,res) {
-
-    })
+    .delete("/room/:roomId",deleteController.deleteRoomById)
+    .delete("/message/:messageId",deleteController.deleteMessageById)
 
 module.exports = router;

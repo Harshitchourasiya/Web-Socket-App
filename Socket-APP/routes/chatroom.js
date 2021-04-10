@@ -1,24 +1,15 @@
 const express = require('express');
+
 //conrollers
-const chatRoom = require('../controllers/chatroom.js');
+const chatRoomController = require('../controllers/chatroom.js');
 
 const router = express.Router();
 
 router
-    .get("/", getRecentConversation  = function (req,res) {
-
-    })
-    .get("/:roomId",getConversationByRoomId  = function (req,res) {
-
-    })
-    .post("/initiate",initiate  = function (req,res) {
-
-    })
-    .post("/:roomId/message",postMessage = function (req,res) {
-
-    })
-    .put("/:roomId/mark-read",markConversationReadByRoomId = function (req,res) {
-
-    })
+    .get("/", chatRoomController.getRecentConversation)
+    .get("/:roomId",chatRoomController.getConversationByRoomId)
+    .post("/initiate",chatRoomController.initiate)
+    .post("/:roomId/message",chatRoomController.postMessage)
+    .put("/:roomId/mark-read",chatRoomController.markConversationReadByRoomId)
 
 module.exports = router;

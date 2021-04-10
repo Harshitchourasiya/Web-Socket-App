@@ -1,49 +1,59 @@
+"use strict";
 const http = require('http');
 const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
+const socketio = require("socket.io");
+require("dotenv").config();
 
-// consting routes
+/** Declaring API routes */
 const indexRouter = require('../routes/index');
 const userRouter = require("../routes/user.js");
 const chatroomRouter = require("../routes/chatroom.js");
 const deleteRouter = require("../routes/delete.js");
 
-// const middlewares
+/** Declaring middleware routes */
 const { decode } = require("../middlewares/jwt.js");
 
-// const config
-const mongo = require('../config/mongo.js');
+/** Establishing connection to Mongodb instance config */
+require('../config/mongo.js');
 
-// express app instance
+// socket configuration
+const webSockets =  require("../utils/websockets");
+
+/** Express app instance */
 const app = express();
 
 /** Get a port from environment and stores in Express */
 const port = process.env.PORT  || "3000";
 app.set("port",port);
 
-// Server properties
+/** Server properties */
 app.use(logger('dev'));
-app.use(express.json());
+app.use(cors());
+app.use(express.json({limit: '20mb'}));
 app.use(express.urlencoded({ extended:false}));
 
-// Adding routes to chat app
+/** Adding routes to chat app */
 app.use('/',indexRouter);
 app.use("/users",userRouter);
-app.use("/room",chatroomRouter);
+app.use("/room",decode,chatroomRouter);
 app.use("/delete",deleteRouter);
 
-/** catch 404 and forward to error handler */
-app.use('*', (req, res) => {
-    return res.status(404).json({
-      success: false,
-      message: 'API endpoint doesnt exist'
-    })
-  });
-
+/** Catch 404 and forward to error handler */
+app.use('*', (res) => {
+  return res.status(404).json({
+    success: false,
+    message: 'API endpoint doesnt exist'
+  })
+});
 
 /** Creating a HTTP server */
 const server = http.createServer(app);
+
+/** Create socket connection */
+global.io = socketio.listen(server);
+global.io.on('connection', webSockets.connection)
 
 /** Listen on provided port on all available interfaces */
 server.listen(port);
@@ -51,4 +61,4 @@ server.listen(port);
 /** Event listeners for HTTP server listening event */
 server.on('listening', () => {
     console.log(`Listening on port:: http://localhost:${port}/`);
-})
+})  

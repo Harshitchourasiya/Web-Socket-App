@@ -5,21 +5,25 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "start:server": "node server/index.js"
+    "start:server": "node server/index.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@withvoid/make-validation": "^1.0.5",
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "logger": "0.0.1",
     "mongoose": "^5.9.27",
     "morgan": "^1.10.0",
     "socket.io": "^2.3.0",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.0",
+    "uuidv4": "^6.2.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

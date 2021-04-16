@@ -11,6 +11,11 @@ socket.io.
 
 It is a JS libray for real-time web applications. It enables real-time, bi-directional communication between web clients and servers.
 
+Babel
+
+Babel is a JavaScript transpiler that converts edge JavaScript into plain old ES5 JavaScript that can run in any browser (even the old ones).
+Babel is responsible to converting new language features to old. You can write code that would run on many browser by using just the bundler but without using Babel. You code does become more convoluted by transpiling it with Babel, so you should only do this if you need to.
+
 ## This Project explains
 - Understanding what ExpressJS, some common backend terminologies
 - What are middlewares?
